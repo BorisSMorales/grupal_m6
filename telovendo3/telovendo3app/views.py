@@ -4,6 +4,9 @@ from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 from django.views import View
 
+from telovendo3.telovendo3app.forms import FormularioContacto
+from telovendo3.telovendo3app.models import Contacto
+
 # Create your views here.
 
 class HomeView(TemplateView):
@@ -22,3 +25,42 @@ class ClientesView(View):
             {'nombre': 'Isabella', 'apellido': 'Martínez', 'correo': 'isabella@example.com', 'telefono': '+56 9 90123456', 'ciudad': 'La Serena', 'ultima_compra': '2023-05-31'},
         ]
         return render(request, self.template_name, {'clientes': clientes_data})
+
+
+class ContactoView(TemplateView):
+    template_name = 'contacto.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['formulario'] = FormularioContacto()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        form = FormularioContacto(request.POST)
+        mensajes = {
+            "enviado": False,
+            "resultado": None
+        }
+        if form.is_valid():
+            nombre = form.cleaned_data['nombre']
+            email = form.cleaned_data['email']
+            asunto = form.cleaned_data['asunto']
+            mensaje = form.cleaned_data['mensaje']
+
+            registro = Contacto(
+                nombre=nombre,
+                email=email,
+                asunto=asunto,
+                mensaje=mensaje
+            )
+            registro.save()
+
+            mensajes = { "enviado": True, "resultado": "Mensaje enviado correctamente" }
+        else:
+            mensajes = { "enviado": False, "resultado": form.errors }
+        return render(request, self.template_name, { "formulario": form, "mensajes": mensajes })
+
+
+
+
+
