@@ -44,12 +44,14 @@ class ContactoView(TemplateView):
         if form.is_valid():
             nombre = form.cleaned_data['nombre']
             email = form.cleaned_data['email']
+            empresa = form.cleaned_data['empresa']
             asunto = form.cleaned_data['asunto']
             mensaje = form.cleaned_data['mensaje']
 
             registro = Contacto(
                 nombre=nombre,
                 email=email,
+                empresa=empresa,
                 asunto=asunto,
                 mensaje=mensaje
             )
