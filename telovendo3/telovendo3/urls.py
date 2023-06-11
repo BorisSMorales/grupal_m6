@@ -16,10 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from telovendo3app.views import HomeView, ClientesView
+from telovendo3app.views import HomeView, ClientesView,ContactoView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', HomeView.as_view(), name='Home'),
-    path('clientes/', ClientesView.as_view(), name='Clientes')
+    path('clientes/', ClientesView.as_view(), name='Clientes'),
+    path('contacto/', ContactoView.as_view(), name='Contacto'),
 ]
