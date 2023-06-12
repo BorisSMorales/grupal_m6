@@ -5,7 +5,6 @@ from django.db import models
 class Contacto(models.Model):
     nombre = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=100, null=False, blank=False)
-    empresa = models.CharField(max_length=100, null=False, blank=False)
     asunto = models.CharField(max_length=100, null=False, blank=False)
     mensaje = models.CharField(max_length=1000, null=False, blank=False)
 

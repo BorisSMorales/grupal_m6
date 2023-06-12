@@ -4,8 +4,8 @@ from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 from django.views import View
 
-from telovendo3app.forms import FormularioContacto
-from telovendo3app.models import Contacto
+from telovendo3.telovendo3app.forms import FormularioContacto
+from telovendo3.telovendo3app.models import Contacto
 
 # Create your views here.
 
@@ -13,7 +13,7 @@ class HomeView(TemplateView):
     template_name = 'telovendo3app/base.html'
 
 class ClientesView(View):
-    template_name = 'telovendo3app/clientes.html'
+    template_name = 'clientes.html'
     
     def get(self, request, *args, **kwargs):
         # Lógica para obtener los datos de los clientes
@@ -28,7 +28,7 @@ class ClientesView(View):
 
 
 class ContactoView(TemplateView):
-    template_name = 'telovendo3app/contacto.html'
+    template_name = 'contacto.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
