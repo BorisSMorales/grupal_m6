@@ -10,7 +10,7 @@ from telovendo3app.models import Contacto
 # Create your views here.
 
 class HomeView(TemplateView):
-    template_name = 'telovendo3app/base.html'
+    template_name = 'telovendo3app/home.html'
 
 class ClientesView(View):
     template_name = 'telovendo3app/clientes.html'
