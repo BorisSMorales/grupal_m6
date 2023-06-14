@@ -4,12 +4,13 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import Group
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.utils.decorators import method_decorator
 from django.views import View
 
-from telovendo3app.forms import FormularioContacto, LoginForm
+from telovendo3app.forms import FormularioContacto, LoginForm, RegistroForm
 from telovendo3app.models import Contacto
 
 # Create your views here.
@@ -105,7 +106,7 @@ class AreaRestringidaView(PermissionRequiredMixin, LoginRequiredMixin, TemplateV
 
 class RegistroView(TemplateView):
     template_name = 'registration/registro.html'
-    form_class = UserCreationForm
+    form_class = RegistroForm
     success_url = reverse_lazy('Home')
 
     def post(self, request, *args, **kwargs):
@@ -114,6 +115,9 @@ class RegistroView(TemplateView):
             form.save()
             user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
             login(request, user)
+            user.groups.add(Group.objects.get(name='grupo1'))  # Asignar usuario al grupo "grupo1"
+            
             return redirect(self.success_url)
+            
 
         return render(request, self.template_name, {'form': form})
