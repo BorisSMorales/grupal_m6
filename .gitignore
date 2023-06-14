@@ -3,3 +3,7 @@
 *.pyc
 __pycache__
 db.sqlite3
+telovendo3/telovendo3/__pycache__/settings.cpython-311.pyc
+telovendo3/telovendo3/__pycache__/urls.cpython-311.pyc
+telovendo3/telovendo3app/__pycache__/forms.cpython-311.pyc
+telovendo3/telovendo3app/__pycache__/views.cpython-311.pyc
