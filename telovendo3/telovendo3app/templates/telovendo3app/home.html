@@ -10,10 +10,15 @@
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="fw-light">TeLOVEndo 💞</h1>
         <p class="lead text-muted">Comercio especializado en diversos productos para el hogar, desde tecnología hasta línea blanca</p>
+    
+        {% if user.is_authenticated %}
+          <h1> Bienvenido {{ user.first_name }} {{ user.last_name }} </h1>
+        {% else %}
         <p>
           <a href="#" class="btn btn-primary my-2">Productos</a>
           <a href="#" class="btn btn-secondary my-2">Contacto para Empresas</a>
         </p>
+        {% endif %}
       </div>
     </div>
   </section>
