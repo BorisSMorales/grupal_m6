@@ -3,6 +3,8 @@ import uuid
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.utils.decorators import method_decorator
 from django.views import View
 
 from telovendo3app.forms import FormularioContacto, LoginForm
@@ -84,6 +86,17 @@ class Ingreso(TemplateView):
       return render(request, self.template_name, { "form": form })
     else:
       return render(request, self.template_name, { "form": form })
-
-
+    
+    
+class AreaRestringidaView(PermissionRequiredMixin, LoginRequiredMixin, TemplateView):
+  template_name = 'telovendo3app/restringido.html'
+  permission_required = 'telovendo3app.puede_leer_formulario'
+  def get(self, request, *args, **kwargs):
+    titulo = "Restringido"
+    contexto = {
+      'titulo': titulo,
+    }
+    if titulo is None:
+      return redirect('Home')
+    return render(request, self.template_name, contexto)
 
