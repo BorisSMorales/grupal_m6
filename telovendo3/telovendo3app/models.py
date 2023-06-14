@@ -12,7 +12,7 @@ class Contacto(models.Model):
     def __str__(self):
         return self.nombre
 
-class Meta:
-    permissions = [
-        ('puede_leer_formulario', 'Permiso para lectura de formularios')
-    ]
+    class Meta:
+        permissions = [
+            ('puede_leer_formulario', 'Permiso para lectura de formularios')
+        ]
