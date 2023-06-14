@@ -2,15 +2,16 @@
 {% load static %}
 
 {% block titulo %}
-    {% if user.is_authenticated %}
-        {{ user.first_name }} {{ user.last_name }}
-    {% else %}
-        {{titulo}}
-    {% endif %}
+
+
 {% endblock %}
 
 {% block content %}
 
-    <h1>Página restringida</h1>
+    {% if user.is_authenticated %}
+    <h1 class="text-center">Bienvenido {{ user.first_name }} {{ user.last_name }}<h1>
+    
+    {% endif %}
+<h3 class="text-center">Solo para usuarios con permisos</h1>
 
 {% endblock %}
