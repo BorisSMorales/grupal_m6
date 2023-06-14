@@ -1,8 +1,10 @@
 from typing import Any, Dict
 import uuid
 from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.utils.decorators import method_decorator
 from django.views import View
@@ -100,3 +102,18 @@ class AreaRestringidaView(PermissionRequiredMixin, LoginRequiredMixin, TemplateV
       return redirect('Home')
     return render(request, self.template_name, contexto)
 
+
+class RegistroView(TemplateView):
+    template_name = 'registration/registro.html'
+    form_class = UserCreationForm
+    success_url = reverse_lazy('home')
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
+            login(request, user)
+            return redirect(self.success_url)
+
+        return render(request, self.template_name, {'form': form})
