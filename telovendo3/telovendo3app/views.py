@@ -79,7 +79,7 @@ class Ingreso(TemplateView):
       if user is not None:
         if user.is_active:
           login(request, user)
-          return redirect('home')
+          return redirect('Home')
       form.add_error('username', 'Credenciales incorrectas')
       return render(request, self.template_name, { "form": form })
     else:
