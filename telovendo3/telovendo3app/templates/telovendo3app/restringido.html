@@ -1,0 +1,16 @@
+{% extends "base.html"%}
+{% load static %}
+
+{% block titulo %}
+    {% if user.is_authenticated %}
+        {{ user.first_name }} {{ user.last_name }}
+    {% else %}
+        {{titulo}}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+    <h1>Página restringida</h1>
+
+{% endblock %}
