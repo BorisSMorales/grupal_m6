@@ -106,7 +106,7 @@ class AreaRestringidaView(PermissionRequiredMixin, LoginRequiredMixin, TemplateV
 class RegistroView(TemplateView):
     template_name = 'registration/registro.html'
     form_class = UserCreationForm
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('Home')
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
