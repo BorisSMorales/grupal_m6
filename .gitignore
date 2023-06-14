@@ -1,6 +1,7 @@
 *.log
 *.pot
 *.pyc
+db.sqlite3
 __pycache__
 telovendo3/telovendo3/__pycache__/settings.cpython-311.pyc
 telovendo3/telovendo3/__pycache__/urls.cpython-311.pyc
