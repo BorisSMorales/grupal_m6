@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
-from telovendo3app.views import HomeView, ClientesView,ContactoView, Ingreso
+from telovendo3app.views import HomeView, ClientesView,ContactoView, Ingreso,AreaRestringidaView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,4 +26,5 @@ urlpatterns = [
     path('contacto/', ContactoView.as_view(), name='Contacto'),
     path('login/',Ingreso.as_view(), name='Login'),
     path('logout/', LogoutView.as_view(), name='logout'),
+    path('restringido/', AreaRestringidaView.as_view(), name='restringido'),
 ]
